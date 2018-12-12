@@ -41,7 +41,7 @@ namespace G1ANT.Addon.Appium
             _appiumLocalService.Start();
         }
 
-        private static AndroidDriver<AndroidElement> _driver;
+        public static AndroidDriver<AndroidElement> _driver;
         private static AppiumLocalService _appiumLocalService;
 
         private void ClassInitialize()
@@ -78,6 +78,7 @@ namespace G1ANT.Addon.Appium
         {
             _appiumLocalService.Dispose();
         }
+
     }
 }
 

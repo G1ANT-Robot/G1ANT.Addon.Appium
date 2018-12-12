@@ -65,6 +65,10 @@
   <ItemGroup>
     <Compile Include="Addon.cs" />
     <None Include="packages.config" />
+    <Compile Include="Commands\ScrollCommand.cs" />
+    <Compile Include="Commands\KeyboardCommand.cs" />
+    <Compile Include="Commands\SendKeysCommand.cs" />
+    <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
