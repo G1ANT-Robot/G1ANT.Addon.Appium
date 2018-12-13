@@ -81,20 +81,20 @@ namespace G1ANT.Addon.Appium
         {
             Boolean isFoundElement=false;
             By myElement;
+
             if (arguments.Id.Value != ""&& arguments.PartialID.Value == "")
             {
                 myElement = By.Id(arguments.Id.Value);
             }
             else if(arguments.PartialID.Value != ""&& arguments.Id.Value == "")
             {
-                myElement = By.XPath("//*[contains(@id, '" + arguments.PartialID.Value + "')]");
+                myElement = By.XPath("//*[contains(@content-desc,\"" + arguments.PartialID.Value + "\")]");
             }
             else
             {
                 throw new ArgumentException($"No ID was provided or it is invalid.");
             }
 
-            //isFoundElement = driver.FindElements(myElement).Count > 0;
             while (isFoundElement == false)
             {
                 SwipeVertical((AppiumDriver<AndroidElement>)driver, 0.9, 0.1, 0.5, 2000,arguments.SwipeDir.Value);
@@ -103,7 +103,6 @@ namespace G1ANT.Addon.Appium
                 
                 elements.AddRange(driver.FindElements(myElement));
                 isFoundElement = driver.FindElements(myElement).Count > 0;
-
                 if (arguments.Text.Value != "" && isFoundElement)
                 {
                     foreach (AndroidElement element in elements)
