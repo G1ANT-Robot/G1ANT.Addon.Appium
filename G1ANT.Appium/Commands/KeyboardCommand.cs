@@ -19,7 +19,7 @@ namespace G1ANT.Addon.Appium
         public class Arguments : CommandArguments
         {
             [Argument(Required = true, Tooltip = "Keys to be sent to element")]
-            public TextStructure Keys { get; set; } = new TextStructure("keys");
+            public TextStructure Keys { get; set; } = new TextStructure("");
         }
 
         public KeyboardCommand(AbstractScripter scripter) : base(scripter)
@@ -31,14 +31,7 @@ namespace G1ANT.Addon.Appium
         public void Execute(Arguments arguments)
         {
             AndroidDriver<AndroidElement> driver = OpenCommand._driver;
-           
-           // for(int i=0;i<arguments.Keys.Value.Length-1;i++)
-           // {
-                driver.Keyboard.PressKey(arguments.Keys.Value);
-                //RobotMessageBox.Show(arguments.Keys.Value[i].ToString());
-               // driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(30));
-           // }
-
+            driver.Keyboard.PressKey(arguments.Keys.Value);
         }
 
 

@@ -22,11 +22,17 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Required = true, Tooltip = "ID of the element to scroll to.")]
+            [Argument(Required = false, Tooltip = "ID of the element to scroll to.")]
             public TextStructure Id { get; set; } = new TextStructure("");
 
-            [Argument(Required = true, Tooltip = "Text of the element to scroll to.")]
+            [Argument(Required = false, Tooltip = "Text of the element to scroll to.")]
             public TextStructure Text { get; set; } = new TextStructure("");
+
+            [Argument(Required = false, Tooltip = "Direction of swipe")]
+            public TextStructure SwipeDir { get; set; } = new TextStructure("up");
+
+            [Argument(Tooltip = "Provide Text, which should be present in ID.")]
+            public TextStructure PartialID { get; set; } = new TextStructure("");
         }
 
         public ScrollCommand(AbstractScripter scripter) : base(scripter)
@@ -39,9 +45,8 @@ namespace G1ANT.Addon.Appium
         {
             AndroidDriver<AndroidElement> driver = OpenCommand._driver;
             TouchAction action = new TouchAction(driver);
-            IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
-            if (arguments.Id.Value != "")
+            if (arguments.Id.Value != ""|| arguments.PartialID.Value!="")
             {
                 driver.HideKeyboard();
                 SrollToElement(driver, arguments);
@@ -52,26 +57,50 @@ namespace G1ANT.Addon.Appium
             }
     
         }
-        private void SwipeVertical(AppiumDriver<AndroidElement> driver, double startPercentage, double finalPercentage, double anchorPercentage, int duration)
+        private void SwipeVertical(AppiumDriver<AndroidElement> driver, double startPercentage, double finalPercentage, double anchorPercentage, int duration, string dir)
         {
             Size size = driver.Manage().Window.Size;
             int anchor = (int)(size.Width * anchorPercentage);
             int startPoint = (int)(size.Height * startPercentage);
             int endPoint = (int)(size.Height * finalPercentage);
-            new TouchAction(driver).Press(anchor, startPoint).Wait(duration).MoveTo(anchor, endPoint).Release().Perform();
+            if (dir == "up")
+            {
+                new TouchAction(driver).Press(anchor, startPoint).Wait(duration).MoveTo(anchor, endPoint).Release().Perform();
+            }
+            else if(dir == "down")
+            {
+                new TouchAction(driver).Press(anchor, endPoint).Wait(duration).MoveTo(anchor, startPoint).Release().Perform();
+            }
+            else
+            {
+                throw new ArgumentException($"Provided swipe direction is invalid. Use \"up\" or \"down\"");
+            }
         }
 
         private AndroidElement SrollToElement(AndroidDriver<AndroidElement> driver,Arguments arguments)
         {
-            Boolean isFoundElement;
-            By myElement = By.Id(arguments.Id.Value);
+            Boolean isFoundElement=false;
+            By myElement;
+            if (arguments.Id.Value != ""&& arguments.PartialID.Value == "")
+            {
+                myElement = By.Id(arguments.Id.Value);
+            }
+            else if(arguments.PartialID.Value != ""&& arguments.Id.Value == "")
+            {
+                myElement = By.XPath("//*[contains(@id, '" + arguments.PartialID.Value + "')]");
+            }
+            else
+            {
+                throw new ArgumentException($"No ID was provided or it is invalid.");
+            }
 
-            isFoundElement = driver.FindElements(myElement).Count > 0;
+            //isFoundElement = driver.FindElements(myElement).Count > 0;
             while (isFoundElement == false)
             {
-                SwipeVertical((AppiumDriver<AndroidElement>)driver, 0.9, 0.1, 0.5, 2000);
+                SwipeVertical((AppiumDriver<AndroidElement>)driver, 0.9, 0.1, 0.5, 2000,arguments.SwipeDir.Value);
 
                 List<AndroidElement> elements = new List<AndroidElement>();
+                
                 elements.AddRange(driver.FindElements(myElement));
                 isFoundElement = driver.FindElements(myElement).Count > 0;
 
