@@ -81,6 +81,7 @@ namespace G1ANT.Addon.Appium
             else if(arguments.Id.Value == "" && arguments.Text.Value == "" && arguments.PartialID.Value !="")
             {
                 el = driver.FindElement(By.XPath("//*[contains(@content-desc,\"" + arguments.PartialID.Value + "\")]"));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(arguments.Id.Value)));
                 el.Click();
             }
             else if(arguments.X.Value!=-1&& arguments.Y.Value != -1)
