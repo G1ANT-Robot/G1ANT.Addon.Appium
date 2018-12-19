@@ -50,6 +50,7 @@ namespace G1ANT.Addon.Appium
                     returnString += element.Text + "\n";
                  }
                 Scripter.Variables.SetVariableValue(arguments.Result.Value, new Language.TextStructure(returnString));
+                returnString = "";
             }
             else
             {

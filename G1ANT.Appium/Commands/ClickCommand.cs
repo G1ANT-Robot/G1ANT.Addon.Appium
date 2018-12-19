@@ -23,6 +23,9 @@ namespace G1ANT.Addon.Appium
             [Argument(Tooltip = "Provide element ID")]
             public TextStructure Id { get; set; } = new TextStructure("");
 
+            [Argument(Tooltip = "Provide element Accesibility ID")]
+            public TextStructure AccessibilityId { get; set; } = new TextStructure("");
+
             [Argument(Tooltip = "Provide Text, which should be present in element.")]
             public TextStructure Text { get; set; } = new TextStructure("");
 
@@ -49,18 +52,30 @@ namespace G1ANT.Addon.Appium
             AndroidDriver<AndroidElement> driver = OpenCommand._driver;
             IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
-            
             if (arguments.Id.Value != ""&& arguments.Text.Value==""&& arguments.PartialID.Value =="")
             {
                 try
                 {
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(arguments.Id.Value)));
-                    el = driver.FindElement(By.Id(arguments.Id.Value));
+                    el = driver.FindElementById(arguments.Id.Value);
                     el.Click();
                 }
                 catch
                 {
                     throw new ArgumentException($"Element with provided id was not found.");
+                }
+            }
+            else if (arguments.Id.Value == "" && arguments.AccessibilityId.Value != "" && arguments.Text.Value == "" && arguments.PartialID.Value == "")
+            {
+                try
+                {
+                    wait.Until(ExpectedConditions.ElementToBeClickable(driver.FindElementByAccessibilityId(arguments.AccessibilityId.Value)));
+                    el = driver.FindElementByAccessibilityId(arguments.AccessibilityId.Value);
+                    el.Click();
+                }
+                catch
+                {
+                    throw new ArgumentException($"Element with provided accessibility id was not found.");
                 }
             }
             else if(arguments.Id.Value != "" && arguments.Text.Value != ""&& arguments.PartialID.Value == "")
