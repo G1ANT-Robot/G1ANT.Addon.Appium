@@ -53,7 +53,7 @@ namespace G1ANT.Addon.Appium
             desiredCaps.SetCapability(MobileCapabilityType.PlatformName, "Android");
             //desiredCaps.SetCapability(MobileCapabilityType.PlatformVersion, "7.1");
             desiredCaps.SetCapability(AndroidMobileCapabilityType.AppActivity, ".activity.MainTabActivity");
-            desiredCaps.SetCapability(MobileCapabilityType.AutomationName, "uiautomator2");
+            //desiredCaps.SetCapability(MobileCapabilityType.AutomationName, "uiautomator2");
             _driver = new AndroidDriver<AndroidElement>(new Uri("http://127.0.0.1:4723/wd/hub"), desiredCaps);
         }
 

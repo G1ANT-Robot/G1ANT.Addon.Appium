@@ -33,6 +33,9 @@ namespace G1ANT.Addon.Appium
 
             [Argument(Tooltip = "Provide Text, which should be present in ID.")]
             public TextStructure PartialID { get; set; } = new TextStructure("");
+
+            [Argument(Tooltip = "Scroll by certain percentage of screen - from 0 to 100")]
+            public IntegerStructure AmmountToScroll { get; set; } = new IntegerStructure();
         }
 
         public ScrollCommand(AbstractScripter scripter) : base(scripter)
@@ -50,6 +53,13 @@ namespace G1ANT.Addon.Appium
             {
                 driver.HideKeyboard();
                 SrollToElement(driver, arguments);
+            }
+            else if (arguments.AmmountToScroll.Value != 0)
+            {
+                float top = 0.9f;
+                float bottom = 0.1f;
+                float swipeAmmount = arguments.AmmountToScroll.Value / 100f * (top - bottom);
+                SwipeVertical(driver,top, top-swipeAmmount, 0.5, 1000, arguments.SwipeDir.Value);
             }
             else
             {

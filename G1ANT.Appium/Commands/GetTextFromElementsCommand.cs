@@ -19,11 +19,14 @@ namespace G1ANT.Addon.Appium
         public class Arguments : CommandArguments
         {
             // Enter all arguments you need
-            [Argument(Tooltip = "Provide element ID")]
-            public TextStructure Id { get; set; } = new TextStructure("");
+            [Argument(Tooltip = "Provide element name to search by")]
+            public TextStructure Name { get; set; } = new TextStructure("");
 
             [Argument(Tooltip = "Extracted text will be stored here")]
             public VariableStructure Result { get; set; } = new VariableStructure("result");
+
+            [Argument(Tooltip = "Id or ClassName")]
+            public TextStructure By { get; set; } = new TextStructure("Id");
 
         }
 
@@ -39,9 +42,17 @@ namespace G1ANT.Addon.Appium
             AndroidDriver<AndroidElement> driver = OpenCommand._driver;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             string returnString = "";
-            if(arguments.Id.Value != "")
+            if(arguments.Name.Value != "")
             {
-                By myElement = By.Id(arguments.Id.Value);
+                By myElement;
+                if (arguments.By.Value.ToLower() == "classname")
+                {
+                    myElement = By.ClassName(arguments.Name.Value);
+                }
+                else
+                {
+                    myElement = By.Id(arguments.Name.Value);
+                }
                 List<AndroidElement> elements = new List<AndroidElement>();
                 elements.AddRange(driver.FindElements(myElement));
 
