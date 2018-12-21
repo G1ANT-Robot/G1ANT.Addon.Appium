@@ -17,11 +17,23 @@ namespace G1ANT.Addon.Appium
         public class Arguments : CommandArguments
         {
             // Enter all arguments you need
-            [Argument(Required = false, Tooltip = "...")]
-            public TextStructure Text { get; set; }
+            [Argument(Required = true, Tooltip = "Device Name")]
+            public TextStructure DeviceName { get; set; } = new TextStructure("");
 
-            [Argument(Tooltip = "Result variable")]
-            public VariableStructure Result { get; set; } = new VariableStructure("result");
+            [Argument(Required = true, Tooltip = "App Package")]
+            public TextStructure AppPackage { get; set; } = new TextStructure("");
+
+            [Argument(Required = true, Tooltip = "Platform Name")]
+            public TextStructure PlatformName { get; set; } = new TextStructure("");
+
+            [Argument(Required = true, Tooltip = "AppActivity")]
+            public TextStructure AppActivity { get; set; } = new TextStructure("");
+
+            [Argument(Required = false, Tooltip = "Automation Name")]
+            public TextStructure AutomationName { get; set; } = new TextStructure("uiautomator");
+
+            [Argument(Required = false, Tooltip = "Automation Name")]
+            public TextStructure Uri { get; set; } = new TextStructure("http://127.0.0.1:4723/wd/hub");
         }
 
         public OpenCommand(AbstractScripter scripter) : base(scripter)
@@ -31,7 +43,7 @@ namespace G1ANT.Addon.Appium
         // Implement this method
         public void Execute(Arguments arguments)
         {
-            ClassInitialize();
+            ClassInitialize(arguments);
         }
 
         private void OpenAppium()
@@ -44,17 +56,17 @@ namespace G1ANT.Addon.Appium
         public static AndroidDriver<AndroidElement> _driver;
         private static AppiumLocalService _appiumLocalService;
 
-        private void ClassInitialize()
+        private void ClassInitialize(Arguments arguments)
         {            
             //string testAppPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ApiDemos-debug.apk");
             var desiredCaps = new DesiredCapabilities();
-            desiredCaps.SetCapability(MobileCapabilityType.DeviceName, "Blue Stacks");
-            desiredCaps.SetCapability(AndroidMobileCapabilityType.AppPackage, "com.instagram.android");
-            desiredCaps.SetCapability(MobileCapabilityType.PlatformName, "Android");
+            desiredCaps.SetCapability(MobileCapabilityType.DeviceName, arguments.DeviceName.Value);
+            desiredCaps.SetCapability(AndroidMobileCapabilityType.AppPackage, arguments.AppPackage.Value);
+            desiredCaps.SetCapability(MobileCapabilityType.PlatformName, arguments.PlatformName.Value);
             //desiredCaps.SetCapability(MobileCapabilityType.PlatformVersion, "7.1");
-            desiredCaps.SetCapability(AndroidMobileCapabilityType.AppActivity, ".activity.MainTabActivity");
-            //desiredCaps.SetCapability(MobileCapabilityType.AutomationName, "uiautomator2");
-            _driver = new AndroidDriver<AndroidElement>(new Uri("http://127.0.0.1:4723/wd/hub"), desiredCaps);
+            desiredCaps.SetCapability(AndroidMobileCapabilityType.AppActivity, arguments.AppActivity.Value);
+            desiredCaps.SetCapability(MobileCapabilityType.AutomationName, arguments.AutomationName.Value);
+            _driver = new AndroidDriver<AndroidElement>(new Uri(arguments.Uri.Value), desiredCaps);
         }
 
         private void AppInitialize()
