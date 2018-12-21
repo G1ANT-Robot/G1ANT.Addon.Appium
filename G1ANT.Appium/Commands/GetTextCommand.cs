@@ -18,7 +18,6 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            // Enter all arguments you need
             [Argument(Tooltip = "Provide element ID")]
             public TextStructure Id { get; set; } = new TextStructure("");
 
@@ -27,7 +26,6 @@ namespace G1ANT.Addon.Appium
 
             [Argument(Tooltip = "Extracted text will be stored here")]
             public VariableStructure Result { get; set; } = new VariableStructure("result");
-
         }
 
         public GetTextCommand(AbstractScripter scripter) : base(scripter)

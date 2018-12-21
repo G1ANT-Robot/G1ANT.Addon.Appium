@@ -18,9 +18,11 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            // Enter all arguments you need
-            [Argument(Tooltip = "Provide element ID")]
+            [Argument(Tooltip = "Provide element ID.")]
             public TextStructure Id { get; set; } = new TextStructure("");
+
+            [Argument(Tooltip = "The result is true when the element is present and false if it is not.")]
+            public VariableStructure Result { get; set; } = new VariableStructure("result");
         }
 
         public PresentCommand(AbstractScripter scripter) : base(scripter)
@@ -28,13 +30,16 @@ namespace G1ANT.Addon.Appium
 
         }
 
-        // Implement this method
         public void Execute(Arguments arguments)
         {
-            
             AndroidDriver<AndroidElement> driver = OpenCommand._driver;
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.Id(arguments.Id.Value)));
+            bool isPresent = false;
+           if (driver.FindElements(By.Id(arguments.Id.Value)).Count>0) 
+            {
+                isPresent = true;
+            }
+           
+            Scripter.Variables.SetVariableValue(arguments.Result.Value,new Language.BooleanStructure(isPresent));
         }
     }
 }

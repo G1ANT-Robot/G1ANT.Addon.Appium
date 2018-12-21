@@ -59,7 +59,7 @@ namespace G1ANT.Addon.Appium
                 float top = 0.9f;
                 float bottom = 0.1f;
                 float swipeAmmount = arguments.AmmountToScroll.Value / 100f * (top - bottom);
-                SwipeVertical(driver,top, top-swipeAmmount, 0.5, 1000, arguments.SwipeDir.Value);
+                SwipeVertical(driver,top, top-swipeAmmount, 0.5, 250, arguments.SwipeDir.Value);
             }
             else
             {
