@@ -81,6 +81,7 @@ namespace G1ANT.Addon.Appium
             else if(arguments.Id.Value != "" && arguments.Text.Value != ""&& arguments.PartialID.Value == "")
             {
                 By myElement = By.Id(arguments.Id.Value);
+                bool found = false;
                 List<AndroidElement> elements = new List<AndroidElement>();
                 elements.AddRange(driver.FindElements(myElement));
                 if (elements.Count > 0)
@@ -90,11 +91,12 @@ namespace G1ANT.Addon.Appium
                         if (element.Text == arguments.Text.Value)
                         {
                             element.Click();
+                            found = true;
                             break;
                         }
                     }
                 }
-                else
+                if (!found)
                 {
                     throw new ArgumentException($"Element with provided id was not found.");
                 }
