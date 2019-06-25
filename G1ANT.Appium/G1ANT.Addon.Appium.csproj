@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Addon.cs" />
     <None Include="packages.config" />
+    <Compile Include="CmdHelper.cs" />
     <Compile Include="Commands\ChangeActivityCommand.cs" />
     <Compile Include="Commands\PresentCommand.cs" />
     <Compile Include="Commands\GetTextFromElementsCommand.cs" />

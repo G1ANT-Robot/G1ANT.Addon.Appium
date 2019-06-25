@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
 using G1ANT.Language;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
-using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Appium.MultiTouch;
-using OpenQA.Selenium.Appium.Service;
-using OpenQA.Selenium.Appium.Service.Options;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
@@ -32,7 +27,6 @@ namespace G1ANT.Addon.Appium
             [Argument(Tooltip = "Provide Text, which should be present in ID.")]
             public TextStructure PartialID { get; set; } = new TextStructure("");
 
-
             [Argument(Tooltip = "Provide X cordinate")]
             public IntegerStructure X { get; set; } = new IntegerStructure(-1);
 
@@ -45,10 +39,8 @@ namespace G1ANT.Addon.Appium
 
         }
 
-        // Implement this method
         public void Execute(Arguments arguments)
         {
-            
             AndroidDriver<AndroidElement> driver = OpenCommand._driver;
             IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
@@ -104,7 +96,6 @@ namespace G1ANT.Addon.Appium
             else if(arguments.Id.Value == "" && arguments.Text.Value == "" && arguments.PartialID.Value !="")
             {
                 el = driver.FindElement(By.XPath("//*[contains(@content-desc,\"" + arguments.PartialID.Value + "\")]"));
-                wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(arguments.Id.Value)));
                 el.Click();
             }
             else if(arguments.X.Value!=-1&& arguments.Y.Value != -1)
@@ -116,10 +107,7 @@ namespace G1ANT.Addon.Appium
             {
                 throw new ArgumentException($"The id and content-desc are not defined. You should provide one of them.");
             }
-
         }
-
-
     }
 }
 
