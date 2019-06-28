@@ -21,7 +21,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            AndroidDriver<AndroidElement> driver = OpenCommand._driver;
+            var driver = OpenCommand._driver;
             string caseSwitch = arguments.KeyCode.Value;
 
             switch (caseSwitch)

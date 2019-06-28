@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using G1ANT.Language;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 using OpenQA.Selenium.Remote;
@@ -14,7 +15,6 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            // Enter all arguments you need
             [Argument(Tooltip = "Provide element ID")]
             public TextStructure Id { get; set; } = new TextStructure("");
 
@@ -41,7 +41,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            AndroidDriver<AndroidElement> driver = OpenCommand._driver;
+            var driver = OpenCommand._driver;
             IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
             if (arguments.Id.Value != ""&& arguments.Text.Value==""&& arguments.PartialID.Value =="")
@@ -74,7 +74,7 @@ namespace G1ANT.Addon.Appium
             {
                 By myElement = By.Id(arguments.Id.Value);
                 bool found = false;
-                List<AndroidElement> elements = new List<AndroidElement>();
+                List<AppiumWebElement> elements = new List<AppiumWebElement>();
                 elements.AddRange(driver.FindElements(myElement));
                 if (elements.Count > 0)
                 {

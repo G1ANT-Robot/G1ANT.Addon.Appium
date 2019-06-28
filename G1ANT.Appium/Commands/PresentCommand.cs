@@ -1,6 +1,5 @@
 ﻿using G1ANT.Language;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
 
 namespace G1ANT.Addon.Appium
@@ -24,14 +23,14 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            AndroidDriver<AndroidElement> driver = OpenCommand._driver;
+            var driver = OpenCommand._driver;
             bool isPresent = false;
            if (driver.FindElements(By.Id(arguments.Id.Value)).Count>0) 
             {
                 isPresent = true;
             }
            
-            Scripter.Variables.SetVariableValue(arguments.Result.Value,new Language.BooleanStructure(isPresent));
+            Scripter.Variables.SetVariableValue(arguments.Result.Value,new BooleanStructure(isPresent));
         }
     }
 }

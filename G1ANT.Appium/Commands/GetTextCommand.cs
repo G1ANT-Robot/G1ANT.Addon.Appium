@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using G1ANT.Language;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
@@ -30,7 +31,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            AndroidDriver<AndroidElement> driver = OpenCommand._driver;
+            var driver = OpenCommand._driver;
             IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             
@@ -50,7 +51,7 @@ namespace G1ANT.Addon.Appium
             else if(arguments.Id.Value != "" && arguments.Text.Value != "")
             {
                 By myElement = By.Id(arguments.Id.Value);
-                List<AndroidElement> elements = new List<AndroidElement>();
+                List<AppiumWebElement> elements = new List<AppiumWebElement>();
                 elements.AddRange(driver.FindElements(myElement));
 
                  foreach (AndroidElement element in elements)

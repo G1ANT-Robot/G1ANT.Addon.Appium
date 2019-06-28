@@ -39,10 +39,10 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            AndroidDriver<AndroidElement> driver = OpenCommand._driver;
+            var driver = OpenCommand._driver;
             TouchAction action = new TouchAction(driver);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
-            if (arguments.Id.Value != ""|| arguments.PartialID.Value!="")
+            if (arguments.Id.Value != "" || arguments.PartialID.Value != "")
             {
                 driver.HideKeyboard();
                 SrollToElement(driver, arguments);
@@ -52,13 +52,13 @@ namespace G1ANT.Addon.Appium
                 float top = 0.9f;
                 float bottom = 0.1f;
                 float swipeAmmount = arguments.AmmountToScroll.Value / 100f * (top - bottom);
-                SwipeVertical(driver,top, top-swipeAmmount, 0.5, 250, arguments.SwipeDir.Value);
+                SwipeVertical(driver, top, top - swipeAmmount, 0.5, 250, arguments.SwipeDir.Value);
             }
             else
             {
                 throw new ArgumentException($"The id and text are not defined. You should provide one of them.");
             }
-    
+
         }
         private void SwipeVertical(AppiumDriver<AndroidElement> driver, double startPercentage, double finalPercentage, double anchorPercentage, int duration, string dir)
         {
@@ -70,7 +70,7 @@ namespace G1ANT.Addon.Appium
             {
                 new TouchAction(driver).Press(anchor, startPoint).Wait(duration).MoveTo(anchor, endPoint).Release().Perform();
             }
-            else if(dir == "down")
+            else if (dir == "down")
             {
                 new TouchAction(driver).Press(anchor, endPoint).Wait(duration).MoveTo(anchor, startPoint).Release().Perform();
             }
@@ -80,16 +80,16 @@ namespace G1ANT.Addon.Appium
             }
         }
 
-        private AndroidElement SrollToElement(AndroidDriver<AndroidElement> driver,Arguments arguments)
+        private AndroidElement SrollToElement(AndroidDriver<AndroidElement> driver, Arguments arguments)
         {
-            Boolean isFoundElement=false;
+            Boolean isFoundElement = false;
             By myElement;
 
-            if (arguments.Id.Value != ""&& arguments.PartialID.Value == "")
+            if (arguments.Id.Value != "" && arguments.PartialID.Value == "")
             {
                 myElement = By.Id(arguments.Id.Value);
             }
-            else if(arguments.PartialID.Value != ""&& arguments.Id.Value == "")
+            else if (arguments.PartialID.Value != "" && arguments.Id.Value == "")
             {
                 myElement = By.XPath("//*[contains(@content-desc,\"" + arguments.PartialID.Value + "\")]");
             }
@@ -100,10 +100,10 @@ namespace G1ANT.Addon.Appium
 
             while (isFoundElement == false)
             {
-                SwipeVertical((AppiumDriver<AndroidElement>)driver, 0.9, 0.1, 0.5, 2000,arguments.SwipeDir.Value);
+                SwipeVertical((AppiumDriver<AndroidElement>)driver, 0.9, 0.1, 0.5, 2000, arguments.SwipeDir.Value);
 
                 List<AndroidElement> elements = new List<AndroidElement>();
-                
+
                 elements.AddRange(driver.FindElements(myElement));
                 isFoundElement = driver.FindElements(myElement).Count > 0;
                 if (arguments.Text.Value != "" && isFoundElement)

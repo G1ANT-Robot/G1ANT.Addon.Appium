@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using G1ANT.Language;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Appium.Service;
@@ -12,6 +15,8 @@ namespace G1ANT.Addon.Appium
     [Command(Name = "appium.open", Tooltip = "This command initialises appium server.")]
     public class OpenCommand : Language.Command
     {
+        public static AndroidDriver<AndroidElement> _driver;
+
         public class Arguments : CommandArguments
         {
             [Argument(Required = true, Tooltip = "Device Name")]
@@ -21,7 +26,10 @@ namespace G1ANT.Addon.Appium
             public TextStructure AppPackage { get; set; } = new TextStructure("");
 
             [Argument(Required = true, Tooltip = "Platform Name")]
-            public TextStructure PlatformName { get; set; } = new TextStructure("");
+            public TextStructure PlatformName { get; set; } = new TextStructure("Android");
+
+            [Argument(Required = false, Tooltip = "Platform version")]
+            public TextStructure PlatformVersion { get; set; } = new TextStructure("");
 
             [Argument(Required = true, Tooltip = "AppActivity")]
             public TextStructure AppActivity { get; set; } = new TextStructure("");
@@ -39,46 +47,44 @@ namespace G1ANT.Addon.Appium
             Initialize(arguments);
         }
 
-        private Uri OpenAppium()
+        private AppiumOptions CreateAppiumOptions(Arguments arguments)
         {
-            var args = new OptionCollector().AddArguments(GeneralOptionList.PreLaunch());
+            var desiredCapabilities = new AppiumOptions();
+            desiredCapabilities.AddAdditionalCapability(MobileCapabilityType.DeviceName, arguments.DeviceName.Value);
+            desiredCapabilities.AddAdditionalCapability(AndroidMobileCapabilityType.AppPackage, arguments.AppPackage.Value);
+            desiredCapabilities.AddAdditionalCapability(MobileCapabilityType.PlatformName, arguments.PlatformName.Value);
+            desiredCapabilities.AddAdditionalCapability(AndroidMobileCapabilityType.AppActivity, arguments.AppActivity.Value);
+            if (!string.IsNullOrEmpty(arguments.PlatformVersion.Value))
+            {
+                desiredCapabilities.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, arguments.PlatformVersion.Value);
+            }
+            return desiredCapabilities;
+        }
+        private void Initialize(Arguments arguments)
+        {
             try
             {
-                _appiumLocalService = new AppiumServiceBuilder().UsingAnyFreePort().Build();
+                var appiumServiceBuilder = new AppiumServiceBuilder().UsingAnyFreePort();
+                var appiumOptions = CreateAppiumOptions(arguments);
+                _driver = new AndroidDriver<AndroidElement>(appiumServiceBuilder, appiumOptions);
             }
             catch (Exception ex)
             {
-                if (ex.Message.StartsWith("Invalid"))
-                {
-                    var result = RobotMessageBox.Show("It seems you have no Appium driver installed. Would you like to install it now?", "Error", MessageBoxButtons.YesNo);
-                    if(result == DialogResult.Yes)
-                    {
-                        CmdHelper.RunCommand("\"C:\\Program Files\\nodejs\\npm.cmd\"", "install appium");
-                    }
-                }
-                return null;
+                InstallAppiumWhenExceptionOccured(ex);
             }
-            _appiumLocalService.Start();
-            return _appiumLocalService.ServiceUrl;
         }
 
-        public static AndroidDriver<AndroidElement> _driver;
-        private static AppiumLocalService _appiumLocalService;
-
-        private void Initialize(Arguments arguments)
+        private void InstallAppiumWhenExceptionOccured(Exception ex)
         {
-            var desiredCaps = new DesiredCapabilities();
-            desiredCaps.SetCapability(MobileCapabilityType.DeviceName, arguments.DeviceName.Value);
-            desiredCaps.SetCapability(AndroidMobileCapabilityType.AppPackage, arguments.AppPackage.Value);
-            desiredCaps.SetCapability(MobileCapabilityType.PlatformName, arguments.PlatformName.Value);
-            desiredCaps.SetCapability(AndroidMobileCapabilityType.AppActivity, arguments.AppActivity.Value);
-            desiredCaps.SetCapability(MobileCapabilityType.AutomationName, arguments.AutomationName.Value);
-            var appiumServerUri = OpenAppium();
-
-            if (appiumServerUri != null)
+            if (ex.Message.StartsWith("Invalid"))
             {
-                _driver = new AndroidDriver<AndroidElement>(appiumServerUri, desiredCaps);
+                var result = RobotMessageBox.Show("It seems you have no Appium driver installed. Would you like to install it now?", "Error", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    CmdHelper.RunCommand("\"C:\\Program Files\\nodejs\\npm.cmd\"", "install -g appium");
+                }
             }
+            else { throw ex; }
         }
     }
 }

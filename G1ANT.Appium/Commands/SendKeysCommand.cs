@@ -26,7 +26,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            AndroidDriver<AndroidElement> driver = OpenCommand._driver;
+            var driver = OpenCommand._driver;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(arguments.Id.Value)));
             IWebElement el = driver.FindElement(By.Id(arguments.Id.Value));
