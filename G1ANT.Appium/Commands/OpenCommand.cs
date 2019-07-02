@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using G1ANT.Language;
@@ -81,7 +82,7 @@ namespace G1ANT.Addon.Appium
                 var result = RobotMessageBox.Show("It seems you have no Appium driver installed. Would you like to install it now?", "Error", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
-                    CmdHelper.RunCommand("\"C:\\Program Files\\nodejs\\npm.cmd\"", "install -g appium");
+                    Process.Start("\"C:\\Program Files\\nodejs\\npm.cmd\"", "install -g appium");
                 }
             }
             else { throw ex; }

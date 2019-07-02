@@ -18,7 +18,6 @@ namespace G1ANT.Addon.Appium
         {
 
         }
-
         public void Execute(Arguments arguments)
         {
             var driver = OpenCommand._driver;

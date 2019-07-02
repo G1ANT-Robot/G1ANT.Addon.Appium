@@ -25,12 +25,12 @@ namespace G1ANT.Addon.Appium
         {
             var driver = OpenCommand._driver;
             bool isPresent = false;
-           if (driver.FindElements(By.Id(arguments.Id.Value)).Count>0) 
+            if (driver.FindElements(By.Id(arguments.Id.Value)).Count > 0)
             {
                 isPresent = true;
             }
-           
-            Scripter.Variables.SetVariableValue(arguments.Result.Value,new BooleanStructure(isPresent));
+
+            Scripter.Variables.SetVariableValue(arguments.Result.Value, new BooleanStructure(isPresent));
         }
     }
 }

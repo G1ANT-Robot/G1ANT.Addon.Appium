@@ -33,7 +33,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            
+
             var driver = OpenCommand._driver;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             string returnString = "";
@@ -52,10 +52,10 @@ namespace G1ANT.Addon.Appium
                 List<AppiumWebElement> elements = new List<AppiumWebElement>();
                 elements.AddRange(driver.FindElements(myElement));
 
-                 foreach (AndroidElement element in elements)
-                 {
+                foreach (AndroidElement element in elements)
+                {
                     returnString += element.Text + "\n";
-                 }
+                }
                 Scripter.Variables.SetVariableValue(arguments.Result.Value, new Language.TextStructure(returnString));
                 returnString = "";
             }

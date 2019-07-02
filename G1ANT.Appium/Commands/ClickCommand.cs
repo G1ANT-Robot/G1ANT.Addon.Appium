@@ -44,7 +44,7 @@ namespace G1ANT.Addon.Appium
             var driver = OpenCommand._driver;
             IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
-            if (arguments.Id.Value != ""&& arguments.Text.Value==""&& arguments.PartialID.Value =="")
+            if (arguments.Id.Value != "" && arguments.Text.Value == "" && arguments.PartialID.Value == "")
             {
                 try
                 {
@@ -70,7 +70,7 @@ namespace G1ANT.Addon.Appium
                     throw new ArgumentException($"Element with provided accessibility id was not found.");
                 }
             }
-            else if(arguments.Id.Value != "" && arguments.Text.Value != ""&& arguments.PartialID.Value == "")
+            else if (arguments.Id.Value != "" && arguments.Text.Value != "" && arguments.PartialID.Value == "")
             {
                 By myElement = By.Id(arguments.Id.Value);
                 bool found = false;
@@ -93,12 +93,12 @@ namespace G1ANT.Addon.Appium
                     throw new ArgumentException($"Element with provided id was not found.");
                 }
             }
-            else if(arguments.Id.Value == "" && arguments.Text.Value == "" && arguments.PartialID.Value !="")
+            else if (arguments.Id.Value == "" && arguments.Text.Value == "" && arguments.PartialID.Value != "")
             {
                 el = driver.FindElement(By.XPath("//*[contains(@content-desc,\"" + arguments.PartialID.Value + "\")]"));
                 el.Click();
             }
-            else if(arguments.X.Value!=-1&& arguments.Y.Value != -1)
+            else if (arguments.X.Value != -1 && arguments.Y.Value != -1)
             {
                 TouchAction a2 = new TouchAction(driver);
                 a2.Tap(arguments.X.Value, arguments.Y.Value).Perform();

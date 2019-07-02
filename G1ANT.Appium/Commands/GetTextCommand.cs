@@ -34,8 +34,8 @@ namespace G1ANT.Addon.Appium
             var driver = OpenCommand._driver;
             IWebElement el;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
-            
-            if (arguments.Id.Value != ""&& arguments.Text.Value=="")
+
+            if (arguments.Id.Value != "" && arguments.Text.Value == "")
             {
                 try
                 {
@@ -48,20 +48,20 @@ namespace G1ANT.Addon.Appium
                     throw new ArgumentException($"Element with provided id was not found.");
                 }
             }
-            else if(arguments.Id.Value != "" && arguments.Text.Value != "")
+            else if (arguments.Id.Value != "" && arguments.Text.Value != "")
             {
                 By myElement = By.Id(arguments.Id.Value);
                 List<AppiumWebElement> elements = new List<AppiumWebElement>();
                 elements.AddRange(driver.FindElements(myElement));
 
-                 foreach (AndroidElement element in elements)
-                 {
-                     if (element.Text == arguments.Text.Value)
-                     {
+                foreach (AndroidElement element in elements)
+                {
+                    if (element.Text == arguments.Text.Value)
+                    {
                         Scripter.Variables.SetVariableValue(arguments.Result.Value, new Language.TextStructure(element.Text));
                         break;
-                     }
-                 }
+                    }
+                }
             }
             else
             {
