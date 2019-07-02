@@ -8,7 +8,7 @@ appium.button KeyCode ⟦text⟧
 
 ## Description
 
-This command emulates press of the chosen hardware button on current appium session.
+This command emulates press of the chosen hardware button in the current appium session.
 
 | Argument | Type | Required | Default Value | Description |
 | -------- | ---- | -------- | ------------- | ----------- |
