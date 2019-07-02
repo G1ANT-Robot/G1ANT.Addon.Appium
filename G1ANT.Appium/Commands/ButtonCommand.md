@@ -24,7 +24,7 @@ For more information about `if`, `timeout`, `errorcall`, `errorjump`, `errormess
 
 ## Example
 
-This example shows how the Excel commands work together: the `appium.open` command starts a new appium session, then the `appium.button` command emulates press of the *Back* button, and the `appium.close` command closes the session.
+This example shows how the Button commands work together: the `appium.open` command starts a new appium session, then the `appium.button` command emulates press of the *Back* button, and the `appium.close` command closes the session.
 
 ```G1ANT
 appium.open apppackage ‴com.exampleapp.android‴ appactivity ‴com.exampleapp.mainactivity.MainActivity‴
