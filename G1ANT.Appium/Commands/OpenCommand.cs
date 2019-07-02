@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Windows.Forms;
 using G1ANT.Language;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Appium.Service;
-using OpenQA.Selenium.Appium.Service.Options;
 using OpenQA.Selenium.Remote;
 
 namespace G1ANT.Addon.Appium

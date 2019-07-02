@@ -14,7 +14,6 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            // Enter all arguments you need
             [Argument(Tooltip = "Provide element name to search by")]
             public TextStructure Name { get; set; } = new TextStructure("");
 
