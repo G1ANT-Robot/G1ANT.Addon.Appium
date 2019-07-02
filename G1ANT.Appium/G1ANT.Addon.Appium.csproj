@@ -71,6 +71,7 @@
     <Compile Include="Addon.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\PresentCommand.cs" />
     <Compile Include="Commands\GetTextFromElementsCommand.cs" />
     <Compile Include="Commands\GetTextCommand.cs" />
