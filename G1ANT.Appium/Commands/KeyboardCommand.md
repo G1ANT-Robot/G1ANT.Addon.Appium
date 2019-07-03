@@ -1,4 +1,4 @@
-# appium.isopen
+# appium.keyboard
 
 ## Syntax
 
