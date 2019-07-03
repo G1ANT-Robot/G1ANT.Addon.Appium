@@ -8,7 +8,7 @@ appium.gettext Id ⟦text⟧ Text ⟦text⟧ Result ⟦text⟧
 
 ## Description
 
-This command performs click action on a certain element of the application. You need to specify Id or AccessibilityId or PartialID or Text or X and Y arguments.
+This command extracts text from element in mobile application.
 
 | Argument | Type | Required | Default Value | Description |
 | -------- | ---- | -------- | ------------- | ----------- |
