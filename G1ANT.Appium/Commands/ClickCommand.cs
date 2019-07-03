@@ -10,7 +10,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace G1ANT.Addon.Appium
 {
-    [Command(Name = "appium.click", Tooltip = "This command clicks choden element.")]
+    [Command(Name = "appium.click", Tooltip = "This command clicks chosen element")]
     public class ClickCommand : Language.Command
     {
         public class Arguments : CommandArguments
