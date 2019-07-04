@@ -10,7 +10,7 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Required =true,Tooltip = "Keys to be sent to element")]
+            [Argument(Required =true,Tooltip = "Keycode of the button to be pressed")]
             public TextStructure KeyCode { get; set; } = new TextStructure("");
         }
 
@@ -21,12 +21,12 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            var driver = OpenCommand._driver;
-            string caseSwitch = arguments.KeyCode.Value;
+            var driver = OpenCommand.GetDriver();
+            string keycode = arguments.KeyCode.Value.ToLower();
 
-            switch (caseSwitch)
+            switch (keycode)
             {
-                case "BACK":
+                case "back":
                     driver.PressKeyCode(AndroidKeyCode.Back);
                     break;
                 default:

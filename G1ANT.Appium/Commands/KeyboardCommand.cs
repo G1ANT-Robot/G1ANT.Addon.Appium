@@ -10,7 +10,7 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Required = true, Tooltip = "Keys to be sent to element")]
+            [Argument(Required = true, Tooltip = "Keys to be entered by the keyboard")]
             public TextStructure Keys { get; set; } = new TextStructure("");
         }
 
@@ -18,9 +18,10 @@ namespace G1ANT.Addon.Appium
         {
 
         }
+
         public void Execute(Arguments arguments)
         {
-            var driver = OpenCommand._driver;
+            var driver = OpenCommand.GetDriver();
             new Actions(driver).SendKeys(arguments.Keys.Value).Build().Perform();
         }
     }

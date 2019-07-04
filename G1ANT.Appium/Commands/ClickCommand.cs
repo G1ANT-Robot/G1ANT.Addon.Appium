@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using G1ANT.Language;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 
 namespace G1ANT.Addon.Appium
 {
@@ -16,22 +11,10 @@ namespace G1ANT.Addon.Appium
         public class Arguments : CommandArguments
         {
             [Argument(Tooltip = "Provide element ID")]
-            public TextStructure Id { get; set; } = new TextStructure("");
+            public TextStructure By { get; set; } = new TextStructure("");
 
-            [Argument(Tooltip = "Provide element Accesibility ID")]
-            public TextStructure AccessibilityId { get; set; } = new TextStructure("");
-
-            [Argument(Tooltip = "Provide Text, which should be present in element.")]
-            public TextStructure Text { get; set; } = new TextStructure("");
-
-            [Argument(Tooltip = "Provide Text, which should be present in ID.")]
-            public TextStructure PartialID { get; set; } = new TextStructure("");
-
-            [Argument(Tooltip = "Provide X cordinate")]
-            public IntegerStructure X { get; set; } = new IntegerStructure(-1);
-
-            [Argument(Tooltip = "Provide Y cordinate")]
-            public IntegerStructure Y { get; set; } = new IntegerStructure(-1);
+            [Argument(Tooltip = "Provide name of the capaility")]
+            public TextStructure Name { get; set; } = new TextStructure("");
         }
 
         public ClickCommand(AbstractScripter scripter) : base(scripter)
@@ -41,73 +24,18 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            var driver = OpenCommand._driver;
-            IWebElement el;
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
-            if (arguments.Id.Value != "" && arguments.Text.Value == "" && arguments.PartialID.Value == "")
+            var by = (SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value);
+
+            if(by == SearchBy.XY)
             {
-                try
-                {
-                    wait.Until(ExpectedConditions.ElementIsVisible(By.Id(arguments.Id.Value)));
-                    el = driver.FindElementById(arguments.Id.Value);
-                    el.Click();
-                }
-                catch
-                {
-                    throw new ArgumentException($"Element with provided id was not found.");
-                }
-            }
-            else if (arguments.Id.Value == "" && arguments.AccessibilityId.Value != "" && arguments.Text.Value == "" && arguments.PartialID.Value == "")
-            {
-                try
-                {
-                    wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(@content-desc,\"" + arguments.AccessibilityId.Value + "\")]")));
-                    el = driver.FindElementByAccessibilityId(arguments.AccessibilityId.Value);
-                    el.Click();
-                }
-                catch
-                {
-                    throw new ArgumentException($"Element with provided accessibility id was not found.");
-                }
-            }
-            else if (arguments.Id.Value != "" && arguments.Text.Value != "" && arguments.PartialID.Value == "")
-            {
-                By myElement = By.Id(arguments.Id.Value);
-                bool found = false;
-                List<AppiumWebElement> elements = new List<AppiumWebElement>();
-                elements.AddRange(driver.FindElements(myElement));
-                if (elements.Count > 0)
-                {
-                    foreach (AndroidElement element in elements)
-                    {
-                        if (element.Text == arguments.Text.Value)
-                        {
-                            element.Click();
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                if (!found)
-                {
-                    throw new ArgumentException($"Element with provided id was not found.");
-                }
-            }
-            else if (arguments.Id.Value == "" && arguments.Text.Value == "" && arguments.PartialID.Value != "")
-            {
-                el = driver.FindElement(By.XPath("//*[contains(@content-desc,\"" + arguments.PartialID.Value + "\")]"));
-                el.Click();
-            }
-            else if (arguments.X.Value != -1 && arguments.Y.Value != -1)
-            {
-                TouchAction a2 = new TouchAction(driver);
-                a2.Tap(arguments.X.Value, arguments.Y.Value).Perform();
+                TouchAction a2 = new TouchAction(OpenCommand.GetDriver());
+                var coordinates = arguments.Name.Value.Split(',');
+                a2.Tap(int.Parse(coordinates[0]), int.Parse(coordinates[1])).Perform();
             }
             else
             {
-                throw new ArgumentException($"The id and content-desc are not defined. You should provide one of them.");
+                ElementHelper.GetElement(by, arguments.Name.Value).Click();
             }
         }
     }
 }
-

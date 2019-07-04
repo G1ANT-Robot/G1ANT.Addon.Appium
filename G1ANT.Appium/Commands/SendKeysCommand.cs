@@ -1,9 +1,6 @@
 ﻿using System;
 using G1ANT.Language;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 
 namespace G1ANT.Addon.Appium
 {
@@ -12,24 +9,24 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Required = true, Tooltip = "Provide element ID")]
-            public TextStructure Id { get; set; }
+            [Argument(Tooltip = "Provide element ID")]
+            public TextStructure By { get; set; } = new TextStructure("");
+
+            [Argument(Tooltip = "Provide name of the capaility")]
+            public TextStructure Name { get; set; } = new TextStructure("");
 
             [Argument(Required = true, Tooltip = "Keys to be sent to element")]
-            public TextStructure Keys { get; set; } = new TextStructure("keys");
+            public TextStructure Keys { get; set; } = new TextStructure("");
         }
 
         public SendKeysCommand(AbstractScripter scripter) : base(scripter)
         {
 
         }
+
         public void Execute(Arguments arguments)
         {
-            var driver = OpenCommand._driver;
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(arguments.Id.Value)));
-            IWebElement el = driver.FindElement(By.Id(arguments.Id.Value));
-            el.SendKeys(arguments.Keys.Value);
+            ElementHelper.GetElement((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value).SendKeys(arguments.Keys.Value);
         }
     }
 }

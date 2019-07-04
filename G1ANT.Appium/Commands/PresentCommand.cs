@@ -1,6 +1,6 @@
 ﻿using G1ANT.Language;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using System;
 
 namespace G1ANT.Addon.Appium
 {
@@ -9,8 +9,11 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Tooltip = "Provide element ID.")]
-            public TextStructure Id { get; set; } = new TextStructure("");
+            [Argument(Tooltip = "Provide element ID")]
+            public TextStructure By { get; set; } = new TextStructure("");
+
+            [Argument(Tooltip = "Provide name of the capaility")]
+            public TextStructure Name { get; set; } = new TextStructure("");
 
             [Argument(Tooltip = "The result is true when the element is present and false if it is not.")]
             public VariableStructure Result { get; set; } = new VariableStructure("result");
@@ -23,9 +26,9 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            var driver = OpenCommand._driver;
             bool isPresent = false;
-            if (driver.FindElements(By.Id(arguments.Id.Value)).Count > 0)
+
+            if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value).Count > 0)
             {
                 isPresent = true;
             }

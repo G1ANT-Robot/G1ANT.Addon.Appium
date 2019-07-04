@@ -13,7 +13,7 @@ namespace G1ANT.Addon.Appium
     [Command(Name = "appium.open", Tooltip = "This command initialises appium server.")]
     public class OpenCommand : Language.Command
     {
-        public static AndroidDriver<AndroidElement> _driver;
+        private static AndroidDriver<AndroidElement> driver;
 
         public class Arguments : CommandArguments
         {
@@ -64,7 +64,7 @@ namespace G1ANT.Addon.Appium
             {
                 var appiumServiceBuilder = new AppiumServiceBuilder().UsingAnyFreePort();
                 var appiumOptions = CreateAppiumOptions(arguments);
-                _driver = new AndroidDriver<AndroidElement>(appiumServiceBuilder, appiumOptions);
+                driver = new AndroidDriver<AndroidElement>(appiumServiceBuilder, appiumOptions);
             }
             catch (Exception ex)
             {
@@ -83,6 +83,11 @@ namespace G1ANT.Addon.Appium
                 }
             }
             else { throw ex; }
+        }
+
+        public static AndroidDriver<AndroidElement> GetDriver()
+        {
+            return driver;
         }
     }
 }

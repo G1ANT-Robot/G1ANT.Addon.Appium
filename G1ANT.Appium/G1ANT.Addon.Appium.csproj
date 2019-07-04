@@ -71,6 +71,7 @@
     <Compile Include="Addon.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Compile Include="ByEnum.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\PresentCommand.cs" />
     <Compile Include="Commands\GetTextFromElementsCommand.cs" />
@@ -81,6 +82,8 @@
     <Compile Include="Commands\SendKeysCommand.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
+    <Compile Include="ElementsHelper.cs" />
+    <Compile Include="ElementHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

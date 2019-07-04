@@ -1,6 +1,4 @@
-﻿using System;
-using G1ANT.Language;
-using OpenQA.Selenium.Appium.Android;
+﻿using G1ANT.Language;
 using OpenQA.Selenium.Remote;
 
 namespace G1ANT.Addon.Appium
@@ -21,7 +19,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            var driver = OpenCommand._driver;
+            var driver = OpenCommand.GetDriver();
             driver.Quit();
         }
     }
