@@ -19,6 +19,8 @@ namespace G1ANT.Addon.Appium
                     return GetElementByPartialId(name);
                 case SearchBy.Text:
                     return GetElementByText(name);
+                case SearchBy.Xpath:
+                    return GetElementByXpath(name);
                 default:
                     throw new ArgumentException($"Search criteria is invalid");
             }
@@ -81,6 +83,21 @@ namespace G1ANT.Addon.Appium
             catch
             {
                 throw new ArgumentException($"Element with provided text was not found.");
+            }
+        }
+
+        private static AndroidElement GetElementByXpath(string xpath)
+        {
+            var driver = OpenCommand.GetDriver();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            try
+            {
+                wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xpath)));
+                return driver.FindElement(By.XPath(xpath));
+            }
+            catch
+            {
+                throw new ArgumentException($"Element with provided xpath was not found.");
             }
         }
     }

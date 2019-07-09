@@ -13,11 +13,11 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Tooltip = "Specify by wich capability the element will be searched")]
-            public TextStructure By { get; set; } = new TextStructure("");
-
             [Argument(Tooltip = "Provide name of the capaility")]
             public TextStructure Name { get; set; } = new TextStructure("");
+
+            [Argument(Tooltip = "Specify by wich capability the element will be searched")]
+            public TextStructure By { get; set; } = new TextStructure("");
 
             [Argument(Required = false, Tooltip = "Direction of swipe")]
             public TextStructure SwipeDir { get; set; } = new TextStructure("up");
