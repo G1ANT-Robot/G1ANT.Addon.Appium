@@ -10,11 +10,11 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
+            [Argument(Tooltip = "Provide name of the capaility")]
+            public TextStructure Search { get; set; } = new TextStructure("");
+
             [Argument(Tooltip = "Provide element ID")]
             public TextStructure By { get; set; } = new TextStructure("");
-
-            [Argument(Tooltip = "Provide name of the capaility")]
-            public TextStructure Name { get; set; } = new TextStructure("");
         }
 
         public ClickCommand(AbstractScripter scripter) : base(scripter)
@@ -28,13 +28,13 @@ namespace G1ANT.Addon.Appium
 
             if(by == SearchBy.XY)
             {
-                TouchAction a2 = new TouchAction(OpenCommand.GetDriver());
-                var coordinates = arguments.Name.Value.Split(',');
-                a2.Tap(int.Parse(coordinates[0]), int.Parse(coordinates[1])).Perform();
+                TouchAction clickAction = new TouchAction(OpenCommand.GetDriver());
+                var coordinates = arguments.Search.Value.Split(',');
+                clickAction.Tap(int.Parse(coordinates[0]), int.Parse(coordinates[1])).Perform();
             }
             else
             {
-                ElementHelper.GetElement(by, arguments.Name.Value).Click();
+                ElementHelper.GetElement(by, arguments.Search.Value).Click();
             }
         }
     }

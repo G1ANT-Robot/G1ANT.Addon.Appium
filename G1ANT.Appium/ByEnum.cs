@@ -6,6 +6,7 @@
         AccessibilityId,
         Text,
         PartialId,
+        Xpath,
         XY
     }
 }

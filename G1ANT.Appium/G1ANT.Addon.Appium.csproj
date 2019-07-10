@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Documents\Nowy folder\</OutputPath>
+    <OutputPath>..\..\G1ANT.Bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="Appium.Net, Version=4.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Appium.WebDriver.4.0.0.6-beta\lib\net45\Appium.Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -85,16 +86,16 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <Compile Include="ByEnum.cs" />
-    <Compile Include="Commands\CloseCommand.cs" />
-    <Compile Include="Commands\PresentCommand.cs" />
-    <Compile Include="Commands\GetTextFromElementsCommand.cs" />
-    <Compile Include="Commands\GetTextCommand.cs" />
-    <Compile Include="Commands\ButtonCommand.cs" />
-    <Compile Include="Commands\ScrollCommand.cs" />
-    <Compile Include="Commands\KeyboardCommand.cs" />
-    <Compile Include="Commands\SendKeysCommand.cs" />
-    <Compile Include="Commands\ClickCommand.cs" />
-    <Compile Include="Commands\OpenCommand.cs" />
+    <Compile Include="Commands\AppiumCloseCommand.cs" />
+    <Compile Include="Commands\AppiumPresentCommand.cs" />
+    <Compile Include="Commands\AppiumGetTextFromElementsCommand.cs" />
+    <Compile Include="Commands\AppiumGetTextCommand.cs" />
+    <Compile Include="Commands\AppiumButtonCommand.cs" />
+    <Compile Include="Commands\AppiumScrollCommand.cs" />
+    <Compile Include="Commands\AppiumKeyboardCommand.cs" />
+    <Compile Include="Commands\AppiumSendKeysCommand.cs" />
+    <Compile Include="Commands\AppiumClickCommand.cs" />
+    <Compile Include="Commands\AppiumOpenCommand.cs" />
     <Compile Include="ElementsHelper.cs" />
     <Compile Include="ElementHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -17,23 +17,23 @@ namespace G1ANT.Addon.Appium
 
         public class Arguments : CommandArguments
         {
-            [Argument(Required = true, Tooltip = "Device Name")]
-            public TextStructure DeviceName { get; set; } = new TextStructure("Android");
+            [Argument(Required = true, Tooltip = "AppActivity")]
+            public TextStructure AppActivity { get; set; } = new TextStructure("");
 
             [Argument(Required = true, Tooltip = "App Package")]
             public TextStructure AppPackage { get; set; } = new TextStructure("");
+
+            [Argument(Required = false, Tooltip = "Automation Name")]
+            public TextStructure AutomationName { get; set; } = new TextStructure("UiAutomator2");
+
+            [Argument(Required = true, Tooltip = "Device Name")]
+            public TextStructure DeviceName { get; set; } = new TextStructure("Android");
 
             [Argument(Required = true, Tooltip = "Platform Name")]
             public TextStructure PlatformName { get; set; } = new TextStructure("Android");
 
             [Argument(Required = false, Tooltip = "Platform version")]
             public TextStructure PlatformVersion { get; set; } = new TextStructure("");
-
-            [Argument(Required = true, Tooltip = "AppActivity")]
-            public TextStructure AppActivity { get; set; } = new TextStructure("");
-
-            [Argument(Required = false, Tooltip = "Automation Name")]
-            public TextStructure AutomationName { get; set; } = new TextStructure("UiAutomator2");
         }
 
         public OpenCommand(AbstractScripter scripter) : base(scripter)

@@ -1,5 +1,4 @@
 ﻿using G1ANT.Language;
-using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 
