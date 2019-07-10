@@ -26,7 +26,7 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            ElementHelper.GetElement((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value).SendKeys(arguments.Keys.Value);
+            ElementHelper.GetElement((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Search.Value).SendKeys(arguments.Keys.Value);
         }
     }
 }

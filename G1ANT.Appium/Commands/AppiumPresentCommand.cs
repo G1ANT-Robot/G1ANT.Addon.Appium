@@ -28,7 +28,7 @@ namespace G1ANT.Addon.Appium
         {
             bool isPresent = false;
 
-            if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value).Count > 0)
+            if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Search.Value).Count > 0)
             {
                 isPresent = true;
             }

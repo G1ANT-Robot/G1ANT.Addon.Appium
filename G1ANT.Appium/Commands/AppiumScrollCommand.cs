@@ -35,7 +35,7 @@ namespace G1ANT.Addon.Appium
         {
             var driver = OpenCommand.GetDriver();
 
-            if (arguments.By.Value != "" && arguments.Name.Value != "")
+            if (arguments.By.Value != "" && arguments.Search.Value != "")
             {
                 driver.HideKeyboard();
                 SrollToElement(driver, arguments);
@@ -78,7 +78,7 @@ namespace G1ANT.Addon.Appium
         {
             while (true)
             {
-                if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value).Count > 0)
+                if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Search.Value).Count > 0)
                 {
                     return;
                 }

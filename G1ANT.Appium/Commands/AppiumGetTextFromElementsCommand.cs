@@ -27,7 +27,7 @@ namespace G1ANT.Addon.Appium
         public void Execute(Arguments arguments)
         {
             var returnString = string.Empty;
-            var elements = ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value);
+            var elements = ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Search.Value);
 
             elements.ForEach(e => returnString += e.Text + "\n");
 

@@ -29,12 +29,12 @@ namespace G1ANT.Addon.Appium
             if(by == SearchBy.XY)
             {
                 TouchAction clickAction = new TouchAction(OpenCommand.GetDriver());
-                var coordinates = arguments.Name.Value.Split(',');
+                var coordinates = arguments.Search.Value.Split(',');
                 clickAction.Tap(int.Parse(coordinates[0]), int.Parse(coordinates[1])).Perform();
             }
             else
             {
-                ElementHelper.GetElement(by, arguments.Name.Value).Click();
+                ElementHelper.GetElement(by, arguments.Search.Value).Click();
             }
         }
     }
