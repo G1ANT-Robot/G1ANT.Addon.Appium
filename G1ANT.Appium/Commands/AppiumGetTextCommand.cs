@@ -10,7 +10,7 @@ namespace G1ANT.Addon.Appium
         public class Arguments : CommandArguments
         {
             [Argument(Tooltip = "Provide name of the capaility")]
-            public TextStructure Name { get; set; } = new TextStructure("");
+            public TextStructure Search { get; set; } = new TextStructure("");
 
             [Argument(Tooltip = "Specify by wich capability the element will be searched")]
             public TextStructure By { get; set; } = new TextStructure("");
