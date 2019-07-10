@@ -29,7 +29,8 @@ namespace G1ANT.Addon.Appium
         private static AndroidElement GetElementById(string id)
         {
             var driver = OpenCommand.GetDriver();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+
             try
             {
                 wait.Until(ExpectedConditions.ElementIsVisible(By.Id(id)));
@@ -44,7 +45,8 @@ namespace G1ANT.Addon.Appium
         private static AndroidElement GetElementByAccessibilityId(string accessibilityId)
         {
             var driver = OpenCommand.GetDriver();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+
             try
             {
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(@content-desc,\"" + accessibilityId + "\")]")));
@@ -59,7 +61,8 @@ namespace G1ANT.Addon.Appium
         private static AndroidElement GetElementByPartialId(string partialId)
         {
             var driver = OpenCommand.GetDriver();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+
             try
             {
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(@content-desc,\"" + partialId + "\")]")));
@@ -74,7 +77,8 @@ namespace G1ANT.Addon.Appium
         private static AndroidElement GetElementByText(string text)
         {
             var driver = OpenCommand.GetDriver();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+
             try
             {
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(text(),\"" + text + "\")]")));
@@ -89,7 +93,8 @@ namespace G1ANT.Addon.Appium
         private static AndroidElement GetElementByXpath(string xpath)
         {
             var driver = OpenCommand.GetDriver();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(7));
+
             try
             {
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xpath)));
