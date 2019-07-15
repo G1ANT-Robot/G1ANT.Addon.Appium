@@ -9,10 +9,10 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Tooltip = "Provide name of the capaility")]
+            [Argument(Required = true, Tooltip = "Provide name of the capaility")]
             public TextStructure Search { get; set; } = new TextStructure("");
 
-            [Argument(Tooltip = "Specify by wich capability the element will be searched")]
+            [Argument(Required = true, Tooltip = "Specify by wich capability the element will be searched")]
             public TextStructure By { get; set; } = new TextStructure("");
 
             [Argument(Tooltip = "Extracted text will be stored here")]
@@ -27,7 +27,7 @@ namespace G1ANT.Addon.Appium
         public void Execute(Arguments arguments)
         {
             var returnString = string.Empty;
-            var elements = ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Search.Value);
+            var elements = ElementsHelper.GetElements(arguments.By.Value, arguments.Search.Value);
 
             elements.ForEach(e => returnString += e.Text + "\n");
 
