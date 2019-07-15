@@ -78,7 +78,7 @@ namespace G1ANT.Addon.Appium
         {
             while (true)
             {
-                if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Search.Value).Count > 0)
+                if (ElementsHelper.GetElements(arguments.By.Value, arguments.Search.Value).Count > 0)
                 {
                     return;
                 }
