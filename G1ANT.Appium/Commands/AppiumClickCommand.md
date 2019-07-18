@@ -3,21 +3,17 @@
 ## Syntax
 
 ```G1ANT
-appium.click Id ⟦text⟧ AccessibilityId ⟦text⟧ Text ⟦text⟧ PartialID ⟦text⟧ X ⟦text⟧ Y ⟦text⟧ 
+appium.click search ⟦text⟧ by ⟦text⟧
 ```
 
 ## Description
 
-This command performs click action on a certain element of the application. You need to specify Id or AccessibilityId or PartialID or Text or X and Y arguments.
+This command clicks a selected element of a chosen mobile application.
 
 | Argument | Type | Required | Default Value | Description |
 | -------- | ---- | -------- | ------------- | ----------- |
-|`Id`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | An Id of the element that is supposed to be clicked |
-|`AccessibilityId`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | AccessibilityId of the element that is supposed to be clicked |
-|`Text`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Text of the element that is supposed to be clicked |
-|`PartialID`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | PartialID of the element that is supposed to be clicked |
-|`X`| [integer](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/IntegerStructure.md) | yes |  | X cordinate of the element that is supposed to be clicked |
-|`Y`| [integer](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/IntegerStructure.md) | yes |  | Y cordinate of the element that is supposed to be clicked |
+|`search`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Name of the element that is supposed to be clicked |
+|`by`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Specifies an element selector: `id`, `accessibilityid`, `text`, `partialid`, `xy`, `xpath` |
 | `if`           | [bool](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/BooleanStructure.md) | no       | true                                                        | Executes the command only if a specified condition is true   |
 | `timeout`      | [timespan](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TimeSpanStructure.md) | no       | [♥timeoutcommand](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Addon.Core/Variables/TimeoutCommandVariable.md) | Specifies time in milliseconds for G1ANT.Robot to wait for the command to be executed |
 | `errorcall`    | [procedure](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/ProcedureStructure.md) | no       |                                                             | Name of a procedure to call when the command throws an exception or when a given `timeout` expires |
@@ -27,12 +23,16 @@ This command performs click action on a certain element of the application. You 
 
 For more information about `if`, `timeout`, `errorcall`, `errorjump`, `errormessage` and `errorresult` arguments, see [Common Arguments](https://manual.g1ant.com/link/G1ANT.Manual/appendices/common-arguments.md) page.
 
+> **Note:** the `appium.` commands require opening a mobile app with the `appium.open` command first.
+
 ## Example
 
-This example shows how the Click commands work together: the `appium.open` command starts a new appium session, then the `appium.click` command clicks element with *example-id* Id of the element in application, and the `appium.close` command closes the session.
+This sample script opens Google Maps application, then clicks (taps) menu button and in the resulting menu clicks the first item (Your Places). After 3 seconds the robot closes the session:
 
 ```G1ANT
-appium.open apppackage ‴com.exampleapp.android‴ appactivity ‴com.exampleapp.mainactivity.MainActivity‴
-appium.click Id ‴example-id‴
+appium.open apppackage com.google.android.apps.maps appactivity com.google.android.maps.MapsActivity
+appium.click search //android.widget.FrameLayout[@index='0']/android.widget.ImageView by xpath
+appium.click search /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView by xpath
+delay 3
 appium.close
 ```

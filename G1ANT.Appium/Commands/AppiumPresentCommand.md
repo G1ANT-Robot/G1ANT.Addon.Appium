@@ -1,18 +1,20 @@
-# appium.keyboard
+# appium.present
 
 ## Syntax
 
 ```G1ANT
-appium.keyboard Keys ⟦text⟧
+appium.present search ⟦text⟧ by ⟦text⟧ result ⟦bool⟧
 ```
 
 ## Description
 
-This command emulates keyboard input to the mobile device.
+This command checks if a selected element is present on the screen.
 
 | Argument | Type | Required | Default Value | Description |
 | -------- | ---- | -------- | ------------- | ----------- |
-|`Keys`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Keys to be sent to the application |
+|`search`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Name of the element to be found on the screen |
+|`by`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Specifies an element selector: `id`, `accessibilityid`, `text`, `partialid`, `xy`, `xpath` |
+|`result`| [bool](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/BooleanStructure.md) | no | `♥result` |Name of a variable where the command’s result will be stored: `true` if the element is present, `false` if it's not |
 | `if`           | [bool](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/BooleanStructure.md) | no       | true                                                        | Executes the command only if a specified condition is true   |
 | `timeout`      | [timespan](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TimeSpanStructure.md) | no       | [♥timeoutcommand](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Addon.Core/Variables/TimeoutCommandVariable.md) | Specifies time in milliseconds for G1ANT.Robot to wait for the command to be executed |
 | `errorcall`    | [procedure](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/ProcedureStructure.md) | no       |                                                             | Name of a procedure to call when the command throws an exception or when a given `timeout` expires |
@@ -22,12 +24,14 @@ This command emulates keyboard input to the mobile device.
 
 For more information about `if`, `timeout`, `errorcall`, `errorjump`, `errormessage` and `errorresult` arguments, see [Common Arguments](https://manual.g1ant.com/link/G1ANT.Manual/appendices/common-arguments.md) page.
 
+> **Note:** the `appium.` commands require opening a mobile app with the `appium.open` command first.
+
 ## Example
 
-This example shows how the Keyboard commands work together: the `appium.open` command starts a new appium session, then the `appium.keyboard` command sends keys to the application, and the `appium.close` command closes the session.
+.
 
 ```G1ANT
 appium.open apppackage ‴com.exampleapp.android‴ appactivity ‴com.exampleapp.mainactivity.MainActivity‴
-appium.keyboard Keys ‴Sample text‴
+appium.present Id ‴example-id‴
 appium.close
 ```

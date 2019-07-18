@@ -1,19 +1,21 @@
-# appium.sendkeys
+# appium.scroll
 
 ## Syntax
 
 ```G1ANT
-appium.sendkeys Id ⟦text⟧ Keys ⟦text⟧
+appium.scroll search ⟦text⟧ by ⟦text⟧ swipedir ⟦text⟧ scrollamount ⟦integer⟧
 ```
 
 ## Description
 
-This command allows to send keys to specified element.
+This command emulates scrolling in a mobile application.
 
 | Argument | Type | Required | Default Value | Description |
 | -------- | ---- | -------- | ------------- | ----------- |
-|`Id`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Id of the element to send keys to |
-|`Keys`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes | |Keys to be sent to the element |
+|`search`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Name of the element to be scrolled |
+|`by`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | yes |  | Specifies an element selector: `id`, `accessibilityid`, `text`, `partialid`, `xy`, `xpath` |
+|`swipedir`| [text](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TextStructure.md) | no | up |Scrolling direction: `up` or `down` |
+|`scrollamount`| [integer](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/IntegerStructure.md) | yes | | Scrolling amount as a percentage of the screen: from `0` to `100` |
 | `if`           | [bool](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/BooleanStructure.md) | no       | true                                                        | Executes the command only if a specified condition is true   |
 | `timeout`      | [timespan](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/TimeSpanStructure.md) | no       | [♥timeoutcommand](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Addon.Core/Variables/TimeoutCommandVariable.md) | Specifies time in milliseconds for G1ANT.Robot to wait for the command to be executed |
 | `errorcall`    | [procedure](https://manual.g1ant.com/link/G1ANT.Language/G1ANT.Language/Structures/ProcedureStructure.md) | no       |                                                             | Name of a procedure to call when the command throws an exception or when a given `timeout` expires |
@@ -23,12 +25,14 @@ This command allows to send keys to specified element.
 
 For more information about `if`, `timeout`, `errorcall`, `errorjump`, `errormessage` and `errorresult` arguments, see [Common Arguments](https://manual.g1ant.com/link/G1ANT.Manual/appendices/common-arguments.md) page.
 
+> **Note:** the `appium.` commands require opening a mobile app with the `appium.open` command first.
+
 ## Example
 
-This example shows how the SendKeys commands work together: the `appium.open` command starts a new appium session, `appium.sendkeys` sends *Example text* keys to the element with *example-id* Id, and `appium.close` command closes the session.
+.
 
 ```G1ANT
 appium.open apppackage ‴com.exampleapp.android‴ appactivity ‴com.exampleapp.mainactivity.MainActivity‴
-appium.sendkeys Id ‴example-id‴ Keys ‴Example text‴
+appium.scroll SwipeDir ‴up‴ ScrollAmount 50
 appium.close
 ```
