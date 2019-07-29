@@ -28,10 +28,33 @@ For more information about `if`, `timeout`, `errorcall`, `errorjump`, `errormess
 
 ## Example
 
-.
+This example shows how you can handle some events that may occur while using Appium on Android Studio’s Virtual Machine. Here, when you open Gmail app in a virtual phone, you will be presented with several dialog boxes you have to react to with clicks/taps, just as if you were using this app for the first time. The `appium.present` command makes sure that a default email account is present on the screen before the robot clicks a button:
 
 ```G1ANT
-appium.open apppackage ‴com.exampleapp.android‴ appactivity ‴com.exampleapp.mainactivity.MainActivity‴
-appium.present Id ‴example-id‴
+appium.open apppackage com.google.android.gm appactivity com.google.android.gm.ui.MailActivityGmail
+appium.click com.google.android.gm:id/welcome_tour_got_it by id
+appium.present com.google.android.gm:id/owner by id
+appium.click com.google.android.gm:id/action_done by id
+appium.click com.google.android.gm:id/gm_dismiss_button by id
+appium.click com.google.android.gm:id/gm_dismiss_button by id
+delay 2
+appium.scroll scrollamount 100
+delay 2
 appium.close
 ```
+
+Let’s see what happens here exactly:
+
+1. The robot opens Gmail app.
+2. On the first welcome screen (*New in Gmail*), click *GOT IT* button to go to another screen.
+3. Wait for a default email account entry to be present on the screen. When it’s there, go to the next step.
+4. Click *TAKE ME TO GMAIL* button.
+5. Click *Next*.
+6. Click *OK*.
+7. Wait 2 seconds.
+
+7. Scroll in the default direction (up) one full screen.
+8. Wait 2 seconds.
+9. Close the app.
+
+> **Note:** Button names will differ depending on a chosen Android system language, but using their internal IDs as in the example above makes the robot script immune to regional settings.

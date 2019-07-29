@@ -28,10 +28,14 @@ For more information about `if`, `timeout`, `errorcall`, `errorjump`, `errormess
 
 ## Example
 
-.
+The script below opens Google Play app, then expands its menu and clicks *My apps & games* entry. In the resulting screen the *Library* tab is clicked and the `appium.gettextfromelements` command retrieves names  of all apps in the current Google account library:
 
 ```G1ANT
-appium.open apppackage ‴com.exampleapp.android‴ appactivity ‴com.exampleapp.mainactivity.MainActivity‴
-appium.gettextfromelements Name ‴example-id‴ By ‴Id‴
+appium.open apppackage com.android.vending appactivity com.google.android.finsky.activities.MainActivity
+appium.click com.android.vending:id/navigation_button by id
+appium.click /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.TextView[1] by xpath
+appium.click /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.TextView[3] by xpath
+appium.gettextfromelements com.android.vending:id/li_title by id
+dialog ♥result
 appium.close
 ```
