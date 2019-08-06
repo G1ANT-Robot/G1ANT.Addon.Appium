@@ -10,10 +10,10 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Tooltip = "Provide name of the capaility")]
+            [Argument(Required = true, Tooltip = "Provide name of the capaility")]
             public TextStructure Search { get; set; } = new TextStructure("");
 
-            [Argument(Tooltip = "Provide element ID")]
+            [Argument(Required = true, Tooltip = "Provide element ID")]
             public TextStructure By { get; set; } = new TextStructure("");
         }
 
@@ -24,9 +24,9 @@ namespace G1ANT.Addon.Appium
 
         public void Execute(Arguments arguments)
         {
-            var by = (SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value);
+            var by = arguments.By.Value.ToLower();
 
-            if(by == SearchBy.XY)
+            if(by == "xy")
             {
                 TouchAction clickAction = new TouchAction(OpenCommand.GetDriver());
                 var coordinates = arguments.Search.Value.Split(',');

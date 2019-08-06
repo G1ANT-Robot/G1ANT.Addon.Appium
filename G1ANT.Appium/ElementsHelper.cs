@@ -8,9 +8,9 @@ namespace G1ANT.Addon.Appium
 {
     public static class ElementsHelper
     {
-        public static List<AndroidElement> GetElements(SearchBy by, string name)
+        public static List<AndroidElement> GetElements(string by, string name)
         {
-            switch (by)
+            switch ((SearchBy)Enum.Parse(typeof(SearchBy), by, true))
             {
                 case SearchBy.Id:
                     return GetElementsById(name);

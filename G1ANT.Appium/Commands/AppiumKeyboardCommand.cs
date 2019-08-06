@@ -21,7 +21,7 @@ namespace G1ANT.Addon.Appium
         public void Execute(Arguments arguments)
         {
             var driver = OpenCommand.GetDriver();
-            new Actions(driver).SendKeys(arguments.Keys.Value).Build().Perform();
+            new Actions(driver).SendKeys(arguments.Keys.Value).Perform();
         }
     }
 }
