@@ -81,7 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppiumAddon.cs" />
+    <Compile Include="Addon.cs" />
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

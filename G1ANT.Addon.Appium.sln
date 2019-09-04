@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G1ANT.Addon.Appium", "G1ANT.Appium\G1ANT.Addon.Appium.csproj", "{09BF2AF3-8F67-46DB-98AF-69F0ABFC14F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G1ANT.Addon.Appium", "G1ANT.Addon.Appium\G1ANT.Addon.Appium.csproj", "{09BF2AF3-8F67-46DB-98AF-69F0ABFC14F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,7 +11,7 @@ namespace G1ANT.Addon.Appium
     [Copyright(Author = "G1ANT Robot LTD", Copyright = "G1ANT Robot LTD", Email = "support@g1ant.com", Website = "www.g1ant.com")]
     [License(Type = "LGPL", ResourceName = "License.txt")]
     [CommandGroup(Name = "appium", Tooltip = "Appium wraper.")]
-    public class AppiumAddon : Language.Addon
+    public class Addon : Language.Addon
     {
 
         public override void Check()
