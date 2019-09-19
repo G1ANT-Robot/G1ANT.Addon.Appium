@@ -10,7 +10,7 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
-            [Argument(Required =true,Tooltip = "Keycode of the button to be pressed")]
+            [Argument(Required = true, Tooltip = "Keycode of the button to be pressed")]
             public TextStructure KeyCode { get; set; } = new TextStructure("");
         }
 

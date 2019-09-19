@@ -13,11 +13,11 @@ namespace G1ANT.Addon.Appium
     {
         public class Arguments : CommandArguments
         {
+            [Argument(Tooltip = "Provide name of the capaility")]
+            public TextStructure Search { get; set; } = new TextStructure("");
+
             [Argument(Tooltip = "Specify by wich capability the element will be searched")]
             public TextStructure By { get; set; } = new TextStructure("");
-
-            [Argument(Tooltip = "Provide name of the capaility")]
-            public TextStructure Name { get; set; } = new TextStructure("");
 
             [Argument(Required = false, Tooltip = "Direction of swipe")]
             public TextStructure SwipeDir { get; set; } = new TextStructure("up");
@@ -35,7 +35,7 @@ namespace G1ANT.Addon.Appium
         {
             var driver = OpenCommand.GetDriver();
 
-            if (arguments.By.Value != "" && arguments.Name.Value != "")
+            if (arguments.By.Value != "" && arguments.Search.Value != "")
             {
                 driver.HideKeyboard();
                 SrollToElement(driver, arguments);
@@ -78,7 +78,7 @@ namespace G1ANT.Addon.Appium
         {
             while (true)
             {
-                if (ElementsHelper.GetElements((SearchBy)Enum.Parse(typeof(SearchBy), arguments.By.Value), arguments.Name.Value).Count > 0)
+                if (ElementsHelper.GetElements(arguments.By.Value, arguments.Search.Value).Count > 0)
                 {
                     return;
                 }

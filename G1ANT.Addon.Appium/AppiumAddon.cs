@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using G1ANT.Language;
+﻿using G1ANT.Language;
 
 
 namespace G1ANT.Addon.Appium
 {
     [Addon(Name = "Appium", Tooltip = "This Addon is used to automatise mobile operating systems.")]
-    [Copyright(Author = "G1ANT LTD", Copyright = "G1ANT LTD", Email = "support@g1ant.com", Website = "www.g1ant.com")]
+    [Copyright(Author = "G1ANT Robot LTD", Copyright = "G1ANT Robot LTD", Email = "support@g1ant.com", Website = "www.g1ant.com")]
     [License(Type = "LGPL", ResourceName = "License.txt")]
     [CommandGroup(Name = "appium", Tooltip = "Appium wraper.")]
-    public class Addon : Language.Addon
+    public class AppiumAddon : Language.Addon
     {
 
         public override void Check()
@@ -40,10 +36,6 @@ namespace G1ANT.Addon.Appium
         {
             base.Dispose();
             // Insert some code here which will dispose all unecessary objects when this Addon will be unloaded
-        }
-
-        public class AppiumAddon : Language.Addon
-        {
         }
     }
 }

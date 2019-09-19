@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Documents\Nowy folder\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,8 +34,8 @@
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Appium.Net, Version=4.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appium.WebDriver.4.0.0.6-beta\lib\net45\Appium.Net.dll</HintPath>
+    <Reference Include="Appium.Net, Version=4.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appium.WebDriver.4.0.0.5-beta\lib\net45\Appium.Net.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -43,8 +43,8 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="G1ANT.Language, Version=4.98.18332.1321, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\G1ANT.Language.1.0.2\lib\net452\G1ANT.Language.dll</HintPath>
+    <Reference Include="G1ANT.Language, Version=4.101.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\G1ANT.Language.4.101.0\lib\net452\G1ANT.Language.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.6.11.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.6.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -55,8 +55,8 @@
     <Reference Include="MimeKit, Version=2.1.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKit.2.1.2\lib\net45\MimeKit.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SeleniumExtras.PageObjects, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.3.11.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>
@@ -81,23 +81,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Addon.cs" />
+    <Compile Include="AppiumAddon.cs" />
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="ByEnum.cs" />
-    <Compile Include="Commands\CloseCommand.cs" />
-    <Compile Include="Commands\PresentCommand.cs" />
-    <Compile Include="Commands\GetTextFromElementsCommand.cs" />
-    <Compile Include="Commands\GetTextCommand.cs" />
-    <Compile Include="Commands\ButtonCommand.cs" />
-    <Compile Include="Commands\ScrollCommand.cs" />
-    <Compile Include="Commands\KeyboardCommand.cs" />
-    <Compile Include="Commands\SendKeysCommand.cs" />
-    <Compile Include="Commands\ClickCommand.cs" />
-    <Compile Include="Commands\OpenCommand.cs" />
+    <Compile Include="Commands\AppiumCloseCommand.cs" />
+    <Compile Include="Commands\AppiumPresentCommand.cs" />
+    <Compile Include="Commands\AppiumGetTextFromElementsCommand.cs" />
+    <Compile Include="Commands\AppiumGetTextCommand.cs" />
+    <Compile Include="Commands\AppiumButtonCommand.cs" />
+    <Compile Include="Commands\AppiumScrollCommand.cs" />
+    <Compile Include="Commands\AppiumKeyboardCommand.cs" />
+    <Compile Include="Commands\AppiumSendKeysCommand.cs" />
+    <Compile Include="Commands\AppiumClickCommand.cs" />
+    <Compile Include="Commands\AppiumOpenCommand.cs" />
     <Compile Include="ElementsHelper.cs" />
     <Compile Include="ElementHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\packages\Appium.WebDriver.4.0.0.5-beta\lib\net45\Appium.Net.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
