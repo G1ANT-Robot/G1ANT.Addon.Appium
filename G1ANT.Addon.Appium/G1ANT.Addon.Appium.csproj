@@ -93,7 +93,6 @@
     <Compile Include="Commands\AppiumGetTextCommand.cs" />
     <Compile Include="Commands\AppiumButtonCommand.cs" />
     <Compile Include="Commands\AppiumScrollCommand.cs" />
-    <Compile Include="Commands\AppiumKeyboardCommand.cs" />
     <Compile Include="Commands\AppiumSendKeysCommand.cs" />
     <Compile Include="Commands\AppiumClickCommand.cs" />
     <Compile Include="Commands\AppiumOpenCommand.cs" />
